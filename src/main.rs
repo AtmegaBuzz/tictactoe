@@ -25,16 +25,24 @@ fn mark(x:usize,y:usize,player_turn: &mut String,board: &mut [[char;3];3]){
 }
 
 
-fn win_check(board: [[char;3];3]) -> (&str,bool){
+fn win_check(board: [[char;3];3]) -> bool{
 
     // row check 
 
     for row in board{
-        if row[0]==row[1] && row[1]==row[2] {
-            if row[0]=='X'{ return ("Player1",true);} else {return ("Player",true);}
+        if (row[0]==row[1] && row[1]==row[2]) && row[0]!='_' {
+            if row[0]=='X'{ 
+                println!("{}","Player 1 won");
+                return true;
+            } 
+            else {
+                println!("{}","Player 2 won");
+                return true;
+            }
         }
     }
     
+    return false;
 
 }
 
@@ -92,6 +100,8 @@ fn main(){
         
         
         mark(position_x,position_y,&mut player_turn,&mut board);
+        let game_end:bool = win_check(board);
+        if game_end==true{break}
         print_board(board);   
 
     }
