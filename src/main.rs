@@ -32,15 +32,56 @@ fn win_check(board: [[char;3];3]) -> bool{
     for row in board{
         if (row[0]==row[1] && row[1]==row[2]) && row[0]!='_' {
             if row[0]=='X'{ 
-                println!("{}","Player 1 won");
+                println!("{}","Player X won");
                 return true;
             } 
             else {
-                println!("{}","Player 2 won");
+                println!("{}","Player Y won");
                 return true;
             }
         }
     }
+
+    // column check 
+
+    for col in 0..board.len(){
+        if (board[0][col]==board[1][col] && board[1][col]==board[2][col]) && board[0][col]!='_'{
+            if board[0][col]=='X'{ 
+                println!("{}","Player X won");
+                return true;
+            } 
+            else {
+                println!("{}","Player Y won");
+                return true;
+            }
+        }
+    }
+
+    // diagonal check
+
+    if(board[0][0]==board[1][1] && board[1][1]==board[2][2]) && board[0][0]!='_'{
+        if board[0][0]=='X'{ 
+            println!("{}","Player X won");
+            return true;
+        } 
+        else {
+            println!("{}","Player Y won");
+            return true;
+        }
+    }
+
+    if(board[0][2]==board[1][1] && board[1][1]==board[2][0]) && board[0][2]!='_'{
+        if board[0][2]=='X'{ 
+            println!("{}","Player X won");
+            return true;
+        } 
+        else {
+            println!("{}","Player Y won");
+            return true;
+        }
+    }
+
+
     
     return false;
 
@@ -101,8 +142,8 @@ fn main(){
         
         mark(position_x,position_y,&mut player_turn,&mut board);
         let game_end:bool = win_check(board);
-        if game_end==true{break}
         print_board(board);   
+        if game_end==true{break}
 
     }
 
